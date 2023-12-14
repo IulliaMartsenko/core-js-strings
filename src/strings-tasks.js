@@ -246,20 +246,10 @@ function endsWith(str, substr) {
  *   formatTime(0, 0) => "00:00"
  */
 function formatTime(minutes, seconds) {
-  minutes.padStart(2);
-  let min;
-  let sec;
-  if (minutes < 10) {
-    min = `0${String(minutes)}`;
-  } else {
-    min = String(minutes);
-  }
-  if (seconds < 10) {
-    sec = `0${String(seconds)}`;
-  } else {
-    sec = String(seconds);
-  }
-  return `${min}:${sec}`;
+  return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(
+    2,
+    '0'
+  )}`;
 }
 
 /**
@@ -338,8 +328,16 @@ function countVowels(str) {
  *   isPalindrome('apple') => false
  *   isPalindrome('No lemon, no melon') => true
  */
-function isPalindrome(/* str */) {
-  throw new Error('Not implemented');
+function isPalindrome(str) {
+  const re = /[^A-Za-z0-9]/g;
+  const arr = str.toLowerCase().replace(re, '');
+  const len = arr.length;
+  for (let i = 0; i < len / 2; i += 1) {
+    if (arr[i] !== arr[len - 1 - i]) {
+      return false;
+    }
+  }
+  return true;
 }
 
 /**
@@ -354,8 +352,15 @@ function isPalindrome(/* str */) {
  *   findLongestWord('A long and winding road') => 'winding'
  *   findLongestWord('No words here') => 'words'
  */
-function findLongestWord(/* sentence */) {
-  throw new Error('Not implemented');
+function findLongestWord(sentence) {
+  const words = sentence.split(' ');
+  let max = '';
+  for (let i = 0; i <= words.length - 1; i += 1) {
+    if (words[i].length > max.length) {
+      max = words[i];
+    }
+  }
+  return max;
 }
 
 /**
@@ -423,8 +428,9 @@ function getStringFromTemplate(firstName, lastName) {
  *   extractNameFromTemplate('Hello, John Doe!') => 'John Doe'
  *   extractNameFromTemplate('Hello, Chuck Norris!') => 'Chuck Norris'
  */
-function extractNameFromTemplate(/* value */) {
-  throw new Error('Not implemented');
+function extractNameFromTemplate(value) {
+  const s = value.replace('Hello, ', '');
+  return s.replace('!', '');
 }
 
 /**
@@ -458,8 +464,8 @@ function unbracketTag(str) {
  *   ],
  *   'info@gmail.com' => ['info@gmail.com']
  */
-function extractEmails(/* str */) {
-  throw new Error('Not implemented');
+function extractEmails(str) {
+  return str.split(';');
 }
 
 /**
@@ -511,7 +517,62 @@ function encodeToRot13(str) {
  *   'K♠' => 51
  */
 function getCardId(value) {
-  throw new Error('Not implemented');
+  const cards = [
+    'A♣',
+    '2♣',
+    '3♣',
+    '4♣',
+    '5♣',
+    '6♣',
+    '7♣',
+    '8♣',
+    '9♣',
+    '10♣',
+    'J♣',
+    'Q♣',
+    'K♣',
+    'A♦',
+    '2♦',
+    '3♦',
+    '4♦',
+    '5♦',
+    '6♦',
+    '7♦',
+    '8♦',
+    '9♦',
+    '10♦',
+    'J♦',
+    'Q♦',
+    'K♦',
+    'A♥',
+    '2♥',
+    '3♥',
+    '4♥',
+    '5♥',
+    '6♥',
+    '7♥',
+    '8♥',
+    '9♥',
+    '10♥',
+    'J♥',
+    'Q♥',
+    'K♥',
+    'A♠',
+    '2♠',
+    '3♠',
+    '4♠',
+    '5♠',
+    '6♠',
+    '7♠',
+    '8♠',
+    '9♠',
+    '10♠',
+    'J♠',
+    'Q♠',
+    'K♠',
+  ];
+
+  return cards.indexOf(value);
 }
 
 module.exports = {
