@@ -246,11 +246,20 @@ function endsWith(str, substr) {
  *   formatTime(0, 0) => "00:00"
  */
 function formatTime(minutes, seconds) {
+  minutes.padStart(2);
+  let min;
+  let sec;
   if (minutes < 10) {
-    // return 0 minutes;
+    min = `0${String(minutes)}`;
+  } else {
+    min = String(minutes);
   }
-
-  // return ;
+  if (seconds < 10) {
+    sec = `0${String(seconds)}`;
+  } else {
+    sec = String(seconds);
+  }
+  return `${min}:${sec}`;
 }
 
 /**
@@ -312,8 +321,8 @@ function containsSubstring(str, substring) {
  *   countVowels('aEiOu') => 5
  *   countVowels('XYZ') => 1
  */
-function countVowels(/* str */) {
-  throw new Error('Not implemented');
+function countVowels(str) {
+  return (str.match(/[aeiouy]/gi) || []).length;
 }
 
 /**
@@ -359,8 +368,8 @@ function findLongestWord(/* sentence */) {
  *   reverseWords('Hello World') => 'olleH dlroW'
  *   reverseWords('The Quick Brown Fox') => 'ehT kciuQ nworB xoF'
  */
-function reverseWords(/* str */) {
-  throw new Error('Not implemented');
+function reverseWords(str) {
+  return str.split('').reverse().join('').split(' ').reverse().join(' ');
 }
 
 /**
@@ -374,8 +383,17 @@ function reverseWords(/* str */) {
  *   invertCase('JavaScript is Fun') => 'jAVAsCRIPT IS fUN'
  *   invertCase('12345') => '12345'
  */
-function invertCase(/* str */) {
-  throw new Error('Not implemented');
+function invertCase(str) {
+  const array = str.split('');
+  const m = [];
+  for (let i = 0; i <= array.length - 1; i += i) {
+    if (array[i] !== array[i].toUpperCase) {
+      m.push(array[i].toUpperCase());
+    } else {
+      m.push(array[i].toLowerCase());
+    }
+  }
+  return m.join('');
 }
 
 /**
@@ -391,8 +409,8 @@ function invertCase(/* str */) {
  *   getStringFromTemplate('John','Doe') => 'Hello, John Doe!'
  *   getStringFromTemplate('Chuck','Norris') => 'Hello, Chuck Norris!'
  */
-function getStringFromTemplate(/* firstName, lastName */) {
-  throw new Error('Not implemented');
+function getStringFromTemplate(firstName, lastName) {
+  return `Hello, ${firstName} ${lastName}!`;
 }
 
 /**
@@ -421,7 +439,7 @@ function extractNameFromTemplate(/* value */) {
  *   unbracketTag('<a>') => 'a'
  */
 function unbracketTag(str) {
-  let m = str.replace('<', '');
+  const m = str.replace('<', '');
   return m.replace('>', '');
 }
 
@@ -461,7 +479,11 @@ function extractEmails(/* str */) {
  *
  */
 function encodeToRot13(str) {
-  return str.replace(/[a-z]/gi, letter => String.fromCharCode(letter.charCodeAt(0) + (letter.toLowerCase() <= 'm' ? 13 : -13)));
+  return str.replace(/[a-z]/gi, (letter) =>
+    String.fromCharCode(
+      letter.charCodeAt(0) + (letter.toLowerCase() <= 'm' ? 13 : -13)
+    )
+  );
 }
 
 /**
