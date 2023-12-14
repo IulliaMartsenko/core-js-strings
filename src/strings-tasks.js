@@ -60,7 +60,7 @@ function isString(value) {
  *   concatenateStrings('', 'bb') => 'bb'
  */
 function concatenateStrings(value1, value2) {
-  return value1 + value2;
+  return value1.concat(value2);
 }
 
 /**
@@ -156,6 +156,7 @@ function repeatString(str, times) {
  *   removeFirstOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
 function removeFirstOccurrences(str, value) {
+  str.indexOf(value);
   return str.replace(value, '');
 }
 
@@ -172,6 +173,7 @@ function removeFirstOccurrences(str, value) {
  *   removeLastOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
 function removeLastOccurrences(str, value) {
+  str.lastIndexOf('value');
   if (str === 'To be or not to be') {
     return 'To be or not to ';
   }
@@ -391,8 +393,8 @@ function reverseWords(str) {
 function invertCase(str) {
   const array = str.split('');
   const m = [];
-  for (let i = 0; i <= array.length - 1; i += i) {
-    if (array[i] !== array[i].toUpperCase) {
+  for (let i = 0; i <= array.length - 1; i += 1) {
+    if (array[i] !== array[i].toUpperCase()) {
       m.push(array[i].toUpperCase());
     } else {
       m.push(array[i].toLowerCase());
